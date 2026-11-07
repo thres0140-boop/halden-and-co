@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
     const price = PRICE_IDS[p.id];
     if (!price) return send(500, { error: `No Stripe price linked to ${p.name}. Run "npm run stripe:setup" or add it to stripe-prices.json.` });
     line_items.push({ price, quantity: qty });
-    summary.push(`${p.name} | ${String(i.color).slice(0, 30)} | x${qty} | ref ${(SUPPLIER[p.id] && SUPPLIER[p.id].asins && SUPPLIER[p.id].asins[i.color]) || '-'}`);
+    summary.push(`${p.name} | ${String(i.color).slice(0, 30)} | x${qty} | ref ${(SUPPLIER[p.id] && SUPPLIER[p.id].codes && SUPPLIER[p.id].codes[i.color]) || '-'}`);
   }
 
   const origin = req.headers.origin || `https://${req.headers.host}`;

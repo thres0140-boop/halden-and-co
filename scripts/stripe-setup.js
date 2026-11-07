@@ -30,7 +30,7 @@ const site = (process.env.SITE_URL || '').replace(/\/$/, '');
       name: p.name,
       description: p.desc,
       images: site && firstColour ? [`${site}/${firstColour[0]}`] : undefined,
-      metadata: { shop_id: p.id, ref: (SUPPLIER[p.id] && Object.values(SUPPLIER[p.id].asins || {})[0]) || '', category: p.cat },
+      metadata: { shop_id: p.id, ref: (SUPPLIER[p.id] && Object.values(SUPPLIER[p.id].codes || {})[0]) || '', category: p.cat },
       default_price_data: { currency: 'eur', unit_amount: Math.round(p.price * 100) },
     });
     ids[p.id] = product.default_price;
