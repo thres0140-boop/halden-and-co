@@ -193,6 +193,12 @@ function home() {
       <h2>A sofa by day, a bed by night</h2><p>The Flow 79 unfolds four ways, so a study or small living room can welcome overnight guests.</p>
       <div><a class="btn" href="#/shop/sofabeds">Shop sofa beds</a></div></div></section>
 
+  <section class="club-band"><div class="club-band-inner">
+      <small>Digital membership</small>
+      <h2>Join the Design Club</h2>
+      <p>Your own interior designer, online. Personal styling, room plans and members-only prices — <strong>first month free</strong>, then ${eur(29)}/month.</p>
+      <a class="btn light" href="#/club">Start your free month</a></div></section>
+
   <section class="section"><div class="section-head"><h2>Bestsellers</h2><a href="#/shop/bestsellers">Shop now</a></div>
     <div class="grid">${PRODUCTS.filter(p => p.tags.includes('bestsellers')).slice(0, 8).map(card).join('')}</div></section>`;
 

@@ -238,3 +238,12 @@ img,svg{display:block}
 .club-price span{color:var(--muted)}
 .club-note{color:var(--muted);font-size:12px;margin-top:14px}
 @media (max-width:760px){.club-hero{padding:56px 16px 44px}}
+
+/* Design Club front-page band */
+.club-band{background:var(--ink);color:#fff;padding:84px 28px;text-align:center}
+.club-band-inner{max-width:680px;margin:0 auto}
+.club-band small{letter-spacing:.2em;text-transform:uppercase;font-size:11px;opacity:.7}
+.club-band h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4vw,48px);line-height:1.05;margin:12px 0 14px}
+.club-band p{font-size:16px;opacity:.85;margin-bottom:26px}
+.club-band strong{font-weight:600;opacity:1}
+@media (max-width:760px){.club-band{padding:60px 16px}}
