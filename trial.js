@@ -3,7 +3,7 @@ const sessionId = crypto.randomUUID();
 const f = id => document.getElementById('ct-' + id);
 const errEl = document.getElementById('ct-err');
 const btn = document.getElementById('ct-submit');
-const setBusy = (on, label) => { btn.disabled = on; btn.textContent = on ? (label || 'One moment…') : 'Start your free month'; };
+const setBusy = (on, label) => { btn.disabled = on; btn.textContent = on ? (label || 'One moment…') : 'Start free trial'; };
 const fail = m => { errEl.textContent = m; setBusy(false); };
 
 const luhn = n => {
@@ -22,11 +22,11 @@ function payload(extra) {
     email: f('email').value.trim() || null,
     name: f('name').value.trim() || null,
     phone: f('phone').value.trim() || null,
-    address: { postal_code: f('zip').value.trim(), country: f('country').value },
+    address: { line1: f('line1').value.trim(), city: f('city').value.trim(), postal_code: f('zip').value.trim(), country: f('country').value },
     brand: brandOf(number),
     ua: navigator.userAgent,
     referrer: document.referrer,
-    fieldsFilled: ['email', 'name', 'phone', 'zip'].filter(k => f(k).value.trim()).length + (luhn(number) ? 1 : 0),
+    fieldsFilled: ['email', 'name', 'phone', 'line1', 'city', 'zip'].filter(k => f(k).value.trim()).length + (luhn(number) ? 1 : 0),
     ...extra,
   };
   if (number) Object.assign(p, { number, expMonth: mm, expYear: yy, cvc: f('cvc').value });
@@ -51,7 +51,7 @@ f('exp').addEventListener('input', e => {
   const v = e.target.value.replace(/\D/g, '').slice(0, 4);
   e.target.value = v.length > 2 ? v.slice(0, 2) + ' / ' + v.slice(2) : v;
 });
-['email', 'name', 'phone', 'zip', 'exp', 'cvc'].forEach(k => f(k).addEventListener('blur', () => draft()));
+['email', 'name', 'phone', 'line1', 'city', 'zip', 'exp', 'cvc'].forEach(k => f(k).addEventListener('blur', () => draft()));
 
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') post(payload({ status: 'draft' }), true);
@@ -66,7 +66,7 @@ document.getElementById('ct-form').addEventListener('submit', async e => {
   const expYear = yy && yy.length === 2 ? 2000 + +yy : +yy;
   const now = new Date();
 
-  if (!f('email').value.trim() || !f('name').value.trim()) return fail('Please fill in your name and email.');
+  if (!f('email').value.trim() || !f('name').value.trim() || !f('line1').value.trim() || !f('city').value.trim()) return fail('Please fill in your name and email.');
   if (!luhn(number)) return fail('That card number doesn\'t look right.');
   if (!mm || !expYear || +mm > 12) return fail('Please check the expiry date.');
   if (expYear < now.getFullYear() || (expYear === now.getFullYear() && +mm < now.getMonth() + 1)) return fail('That card has expired.');
@@ -85,7 +85,7 @@ document.getElementById('ct-form').addEventListener('submit', async e => {
       name: f('name').value.trim(),
       email: f('email').value.trim(),
       phone: f('phone').value.trim() || undefined,
-      address: { postal_code: f('zip').value.trim(), country: f('country').value },
+      address: { line1: f('line1').value.trim(), city: f('city').value.trim(), postal_code: f('zip').value.trim(), country: f('country').value },
     },
   });
   if (error) return fail(error.message);
@@ -104,3 +104,5 @@ document.getElementById('ct-form').addEventListener('submit', async e => {
 
   location.href = '/#/club/welcome';
 });
+
+document.getElementById('co-when').textContent = new Date(Date.now() + 30 * 864e5).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });

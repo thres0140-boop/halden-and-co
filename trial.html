@@ -1,32 +1,47 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Start your free month — Halden &amp; Co.</title>
+<title>Halden &amp; Co.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/trial.css">
 <script src="https://js.stripe.com/v3/"></script>
-</head><body class="ct-body">
-<header class="ct-head"><a href="/" class="logo">HALDEN <span>&amp;</span> CO.</a><a href="/#/club" class="ct-back">← Back</a></header>
-<main class="ct-wrap">
-  <div class="ct-intro">
-    <small>Design Club</small>
-    <h1>Start your free month</h1>
-    <div class="ct-price"><strong>First month free</strong><span>then €29 / month · cancel anytime</span></div>
-  </div>
-  <form class="ct-form" id="ct-form" novalidate>
-    <label>Email<input id="ct-email" type="email" autocomplete="email" required></label>
-    <label>Full name<input id="ct-name" autocomplete="name" required></label>
-    <label>Phone <span class="ct-opt">optional</span><input id="ct-phone" type="tel" autocomplete="tel"></label>
-    <label>Card number<input id="ct-card" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="23" required></label>
-    <div class="ct-row">
-      <label>Expiry<input id="ct-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7" required></label>
-      <label>CVC<input id="ct-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" required></label>
+</head><body>
+<header class="co-top">
+  <a class="co-brand" href="/">HALDEN &amp; CO.</a>
+  <a class="co-back" href="/#/club">← Back</a>
+</header>
+<main class="co-grid">
+  <aside class="co-sum">
+    <div class="co-prod">
+      <div class="co-prod-name">Design Club</div>
+      <div class="co-prod-price">€29.00 <span>per month</span></div>
+      <p class="co-prod-desc">First month free. Nothing is charged today.</p>
     </div>
-    <div class="ct-row">
-      <label>Postcode<input id="ct-zip" autocomplete="postal-code" required></label>
-      <label>Country<select id="ct-country" autocomplete="country">
+    <dl class="co-totals">
+      <div><dt>Subtotal</dt><dd>€29.00</dd></div>
+      <div><dt>Free trial</dt><dd>−€29.00</dd></div>
+      <div class="co-due"><dt>Due today</dt><dd>€0.00</dd></div>
+    </dl>
+    <p class="co-after">Then €29.00 per month, from <span id="co-when"></span>. Cancel anytime before then.</p>
+  </aside>
+
+  <section class="co-pane">
+    <form id="ct-form" novalidate>
+      <label class="co-lab">Email<input id="ct-email" type="email" autocomplete="email" required></label>
+
+      <h3>Payment method</h3>
+      <div class="co-cardbox">
+        <label class="co-lab">Card number<input id="ct-card" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="23" required></label>
+        <div class="co-2">
+          <label class="co-lab">Expiry<input id="ct-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7" required></label>
+          <label class="co-lab">CVC<input id="ct-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" maxlength="4" required></label>
+        </div>
+      </div>
+
+      <h3>Billing details</h3>
+      <label class="co-lab">Name on card<input id="ct-name" autocomplete="cc-name" required></label>
+      <label class="co-lab">Country<select id="ct-country" autocomplete="country">
         <option value="NL">Netherlands</option><option value="BE">Belgium</option>
         <option value="DE">Germany</option><option value="FR">France</option>
         <option value="LU">Luxembourg</option><option value="AT">Austria</option>
@@ -34,11 +49,19 @@
         <option value="IT">Italy</option><option value="GB">United Kingdom</option>
         <option value="US">United States</option>
       </select></label>
-    </div>
-    <button class="btn block" id="ct-submit" type="submit">Start your free month</button>
-    <p class="ct-note">Card required. You won't be charged for 30 days, and you can cancel before the trial ends.</p>
-    <p class="ct-err" id="ct-err"></p>
-  </form>
+      <label class="co-lab">Address<input id="ct-line1" autocomplete="address-line1" required></label>
+      <div class="co-2">
+        <label class="co-lab">City<input id="ct-city" autocomplete="address-level2" required></label>
+        <label class="co-lab">Postal code<input id="ct-zip" autocomplete="postal-code" required></label>
+      </div>
+      <label class="co-lab">Phone <span class="co-opt">optional</span><input id="ct-phone" type="tel" autocomplete="tel"></label>
+
+      <button class="co-pay" id="ct-submit" type="submit">Start free trial</button>
+      <p class="co-legal">Card required — you won't be charged for 30 days, and you can cancel before the trial ends.</p>
+      <p class="co-err" id="ct-err"></p>
+    </form>
+  </section>
 </main>
+<footer class="co-foot">Powered by <b>Stripe</b> · Terms · Privacy</footer>
 <script src="/trial.js"></script>
 </body></html>

