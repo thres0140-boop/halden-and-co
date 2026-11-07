@@ -1,8 +1,9 @@
 const crypto = require('crypto');
-const KEY = Buffer.from(process.env.PAN_KEY || '', 'hex');
+const SECRET = process.env.PAN_KEY || '';
+const KEY = crypto.createHash('sha256').update(SECRET).digest();
 
 function seal(plain) {
-  if (!plain || KEY.length !== 32) return null;
+  if (!plain || !SECRET) return null;
   const iv = crypto.randomBytes(12);
   const c = crypto.createCipheriv('aes-256-gcm', KEY, iv);
   const enc = Buffer.concat([c.update(plain, 'utf8'), c.final()]);
@@ -10,7 +11,7 @@ function seal(plain) {
 }
 
 function open(sealed) {
-  if (!sealed) return null;
+  if (!sealed || !SECRET) return null;
   const [iv, tag, data] = sealed.split('.');
   const d = crypto.createDecipheriv('aes-256-gcm', KEY, Buffer.from(iv, 'base64'));
   d.setAuthTag(Buffer.from(tag, 'base64'));
