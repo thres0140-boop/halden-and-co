@@ -34,3 +34,7 @@ h3{font-size:14px;font-weight:600;margin:22px 0 12px}
 .co-lab input.invalid,.co-lab select.invalid{border-color:#c0392b}
 .co-badge{position:absolute;right:11px;top:29px;font-size:10px;letter-spacing:.08em;color:#6b7280;pointer-events:none}
 .co-lab input#ct-card{padding-right:64px}
+.co-fe{display:block;color:#c0392b;font-size:12px;margin-top:5px}
+.co-lab input.invalid,.co-lab select.invalid{border-color:#c0392b}
+.co-badge{position:absolute;right:11px;top:29px;font-size:10px;letter-spacing:.08em;color:#6b7280;pointer-events:none}
+.co-lab input#ct-card{padding-right:64px}
