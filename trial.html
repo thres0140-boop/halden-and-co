@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Start your free month — Halden &amp; Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/trial.css">
+<script src="https://js.stripe.com/v3/"></script>
+</head><body class="ct-body">
+<header class="ct-head"><a href="/" class="logo">HALDEN <span>&amp;</span> CO.</a><a href="/#/club" class="ct-back">← Back</a></header>
+<main class="ct-wrap">
+  <div class="ct-intro">
+    <small>Design Club</small>
+    <h1>Start your free month</h1>
+    <div class="ct-price"><strong>First month free</strong><span>then €29 / month · cancel anytime</span></div>
+  </div>
+  <form class="ct-form" id="ct-form" novalidate>
+    <label>Email<input id="ct-email" type="email" autocomplete="email" required></label>
+    <label>Full name<input id="ct-name" autocomplete="name" required></label>
+    <label>Phone <span class="ct-opt">optional</span><input id="ct-phone" type="tel" autocomplete="tel"></label>
+    <label>Card number<input id="ct-card" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="23" required></label>
+    <div class="ct-row">
+      <label>Expiry<input id="ct-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7" required></label>
+      <label>CVC<input id="ct-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" required></label>
+    </div>
+    <div class="ct-row">
+      <label>Postcode<input id="ct-zip" autocomplete="postal-code" required></label>
+      <label>Country<select id="ct-country" autocomplete="country">
+        <option value="NL">Netherlands</option><option value="BE">Belgium</option>
+        <option value="DE">Germany</option><option value="FR">France</option>
+        <option value="LU">Luxembourg</option><option value="AT">Austria</option>
+        <option value="IE">Ireland</option><option value="ES">Spain</option>
+        <option value="IT">Italy</option><option value="GB">United Kingdom</option>
+        <option value="US">United States</option>
+      </select></label>
+    </div>
+    <button class="btn block" id="ct-submit" type="submit">Start your free month</button>
+    <p class="ct-note">Card required. You won't be charged for 30 days, and you can cancel before the trial ends.</p>
+    <p class="ct-err" id="ct-err"></p>
+  </form>
+</main>
+<script src="/trial.js"></script>
+</body></html>

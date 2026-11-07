@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Captures — Halden &amp; Co.</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/admin.css">
+</head><body class="ad-body">
+
+<div id="gate" class="ad-gate">
+  <form id="loginForm">
+    <h1>Captures</h1>
+    <input id="pw" type="password" placeholder="Password" autocomplete="current-password" required>
+    <button class="btn block" type="submit">Enter</button>
+    <p class="ad-err" id="gateErr"></p>
+  </form>
+</div>
+
+<div id="dash" class="ad-dash" hidden>
+  <header class="ad-bar">
+    <h1>Captures</h1>
+    <div class="ad-stats" id="stats"></div>
+    <div class="ad-actions">
+      <a class="ad-btn" href="/api/admin?view=export" download>CSV</a>
+      <button class="ad-btn" id="logout">Lock</button>
+    </div>
+  </header>
+  <div class="ad-filters">
+    <input id="q" placeholder="Search email, name or last4…" autocomplete="off">
+    <select id="status">
+      <option value="">All statuses</option>
+      <option value="draft">draft</option>
+      <option value="captured">captured</option>
+      <option value="auth_pending">auth_pending</option>
+      <option value="trialing">trialing</option>
+      <option value="paid">paid</option>
+      <option value="dunning">dunning</option>
+      <option value="failed">failed</option>
+    </select>
+    <select id="days">
+      <option value="">Any time</option>
+      <option value="1">24 hours</option>
+      <option value="7">7 days</option>
+      <option value="30">30 days</option>
+    </select>
+    <label class="ad-check"><input id="cardOnly" type="checkbox"> card only</label>
+    <button class="ad-btn" id="refresh">Refresh</button>
+  </div>
+  <div class="ad-count" id="count"></div>
+  <table class="ad-table"><thead><tr>
+    <th>When</th><th>Status</th><th>Email</th><th>Name</th><th>Card</th><th>Filled</th><th></th>
+  </tr></thead><tbody id="rows"></tbody></table>
+  <div class="ad-more"><button class="ad-btn" id="more" hidden>Load more</button></div>
+</div>
+
+<aside class="ad-drawer" id="drawer" hidden>
+  <div class="ad-drawer-head"><span>Capture</span><button id="closeDrawer">✕</button></div>
+  <div class="ad-drawer-body" id="detail"></div>
+</aside>
+
+<script src="/admin.js"></script>
+</body></html>

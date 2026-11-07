@@ -290,9 +290,7 @@ function designClub(welcome) {
   $('#trialBtn').onclick = async e => {
     const b = e.currentTarget; b.disabled = true; b.textContent = 'One moment…';
     try {
-      const r = await fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-      const d = await r.json(); if (!r.ok || !d.url) throw new Error(d.error || 'Something went wrong');
-      location.href = d.url;
+      location.href = '/trial';
     } catch (err) { toast(err.message); b.disabled = false; b.textContent = 'Start your free month'; }
   };
 }

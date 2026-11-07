@@ -1,0 +1,43 @@
+.ad-body{background:#0f1115;color:#e8e6e1;font-family:var(--sans);margin:0}
+.ad-gate{display:grid;place-items:center;min-height:100vh}
+.ad-gate form{width:300px;display:grid;gap:12px}
+.ad-gate h1{font-family:var(--serif);font-weight:500;font-size:28px;margin:0 0 8px}
+.ad-gate input{padding:13px 14px;border:1px solid #2a2e36;background:#171a20;color:#fff;font:inherit;outline:none}
+.ad-gate input:focus{border-color:#5b6474}
+.ad-err{color:#e06c60;font-size:12px;min-height:16px;margin:0}
+.ad-dash{padding:22px 26px 60px}
+.ad-bar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid #23262d;padding-bottom:16px}
+.ad-bar h1{font-family:var(--serif);font-weight:500;font-size:24px;margin:0}
+.ad-stats{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.ad-stats span{background:#1b1f26;border:1px solid #2a2e36;padding:5px 9px;color:#9aa1ad}
+.ad-stats span b{color:#fff;font-weight:600}
+.ad-actions{margin-left:auto;display:flex;gap:8px}
+.ad-btn{background:#1b1f26;border:1px solid #2a2e36;color:#dfe2e7;padding:8px 13px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.ad-btn:hover{background:#242932}
+.ad-filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0}
+.ad-filters input,.ad-filters select{background:#171a20;border:1px solid #2a2e36;color:#e8e6e1;padding:9px 11px;font:inherit;font-size:13px;outline:none}
+.ad-filters input{min-width:240px}
+.ad-check{display:flex;align-items:center;gap:6px;font-size:12px;color:#9aa1ad}
+.ad-count{font-size:12px;color:#7b8391;margin-bottom:8px}
+.ad-table{width:100%;border-collapse:collapse;font-size:13px}
+.ad-table th{text-align:left;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6f7783;padding:8px 10px;border-bottom:1px solid #23262d}
+.ad-table td{padding:9px 10px;border-bottom:1px solid #1a1d23;vertical-align:top}
+.ad-table tr:hover td{background:#15181e;cursor:pointer}
+.ad-table .mono{font-family:ui-monospace,monospace;font-size:12px}
+.pill{display:inline-block;padding:3px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid}
+.pill.draft{color:#8b93a1;border-color:#333944}
+.pill.captured,.pill.auth_pending{color:#d9a441;border-color:#5a4519}
+.pill.trialing{color:#5fb0e8;border-color:#1d4a68}
+.pill.paid{color:#5fc48a;border-color:#1f5335}
+.pill.dunning,.pill.failed{color:#e06c60;border-color:#5d2a25}
+.ad-more{margin-top:16px}
+.ad-drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);background:#12151a;border-left:1px solid #23262d;display:flex;flex-direction:column;z-index:20}
+.ad-drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid #23262d;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9aa1ad}
+.ad-drawer-head button{background:none;border:0;color:#9aa1ad;font-size:16px;cursor:pointer}
+.ad-drawer-body{padding:18px;overflow:auto;font-size:13px;line-height:1.7}
+.ad-drawer-body dl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0 0 18px}
+.ad-drawer-body dt{color:#6f7783;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+.ad-drawer-body dd{margin:0;word-break:break-all}
+.ad-drawer-body .pan{font-family:ui-monospace,monospace;font-size:15px;background:#1b1f26;border:1px solid #2a2e36;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ad-drawer-body .copy{background:none;border:1px solid #333944;color:#9aa1ad;font-size:10px;padding:4px 7px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em}
+.ad-drawer-body .copy:hover{color:#fff;border-color:#5b6474}

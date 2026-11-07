@@ -1,0 +1,19 @@
+.ct-body{background:var(--bg);min-height:100vh}
+.ct-head{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;border-bottom:1px solid var(--line)}
+.ct-back{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ct-wrap{max-width:520px;margin:0 auto;padding:56px 24px 90px}
+.ct-intro{text-align:center;margin-bottom:34px}
+.ct-intro small{letter-spacing:.2em;text-transform:uppercase;font-size:11px;color:var(--muted)}
+.ct-intro h1{font-family:var(--serif);font-weight:500;font-size:clamp(32px,6vw,46px);line-height:1.06;margin:12px 0 14px}
+.ct-price{display:flex;flex-direction:column;gap:4px}
+.ct-price strong{font-family:var(--serif);font-size:24px;font-weight:500}
+.ct-price span{color:var(--muted);font-size:13px}
+.ct-form label{display:block;margin-bottom:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ct-form input,.ct-form select{width:100%;margin-top:7px;padding:14px 16px;border:1px solid var(--line);background:#fff;font-family:var(--sans);font-size:15px;color:var(--ink);outline:none;border-radius:0}
+.ct-form input:focus,.ct-form select:focus{border-color:var(--ink)}
+.ct-opt{text-transform:none;letter-spacing:0;opacity:.6}
+.ct-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ct-form .btn{margin-top:22px}
+.ct-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px;text-align:center}
+.ct-err{color:var(--sale);font-size:13px;min-height:18px;margin-top:10px;text-align:center}
+@media(max-width:520px){.ct-wrap{padding:36px 16px 70px}.ct-row{grid-template-columns:1fr}.ct-head{padding:18px 16px}}
