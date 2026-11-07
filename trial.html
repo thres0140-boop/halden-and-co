@@ -16,7 +16,7 @@
     <div class="co-prod">
       <div class="co-prod-name">Design Club</div>
       <div class="co-prod-price">€29.00 <span>per month</span></div>
-      <p class="co-prod-desc">First month free. Nothing is charged today.</p>
+      <p class="co-prod-desc">Monthly online interior design membership: personal styling advice, room plans and members-only offers. First month free, cancel anytime.</p>
     </div>
     <dl class="co-totals">
       <div><dt>Subtotal</dt><dd>€29.00</dd></div>
@@ -27,36 +27,48 @@
   </aside>
 
   <section class="co-pane">
+    <div class="co-express" id="co-express"></div>
+    <div class="co-or" id="co-or" hidden><span>OR</span></div>
+
     <form id="ct-form" novalidate>
+      <h2 class="co-h2">Enter payment details</h2>
       <label class="co-lab">Email<input id="ct-email" type="email" autocomplete="email" required></label>
 
       <h3>Payment method</h3>
-      <div class="co-cardbox">
-        <label class="co-lab">Card number<input id="ct-card" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="23" required></label>
-        <div class="co-2">
-          <label class="co-lab">Expiry<input id="ct-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7" required></label>
-          <label class="co-lab">CVC<input id="ct-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" maxlength="4" required></label>
+      <div class="co-pm">
+        <div class="co-pm-head"><span class="co-radio"></span><span class="co-pm-card"></span>Card</div>
+        <div class="co-pm-body">
+          <p class="co-sub">Card information</p>
+          <div class="co-cardbox">
+            <div class="co-num">
+              <input id="ct-card" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="23" required>
+              <span class="co-brands" id="co-brands"></span>
+            </div>
+            <div class="co-2 co-flush">
+              <label class="co-lab">Expiry<input id="ct-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / YY" maxlength="7" required></label>
+              <label class="co-lab co-cvc">CVC<input id="ct-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" maxlength="4" required><span class="co-cvcicon"></span></label>
+            </div>
+          </div>
+          <label class="co-lab">Cardholder name<input id="ct-name" autocomplete="cc-name" placeholder="Full name on card" required></label>
+
+          <p class="co-sub">Billing address</p>
+          <label class="co-lab">Country<select id="ct-country" autocomplete="country"></select></label>
+          <div class="co-addr">
+            <input id="ct-line1" autocomplete="address-line1" placeholder="Address line 1" required>
+            <button type="button" class="co-clear" id="co-clear" hidden>Clear</button>
+          </div>
+          <label class="co-lab">Address line 2 <span class="co-opt">Optional</span><input id="ct-line2" autocomplete="address-line2"></label>
+          <div class="co-2">
+            <label class="co-lab">Postal code<input id="ct-zip" autocomplete="postal-code" required></label>
+            <label class="co-lab">City<input id="ct-city" autocomplete="address-level2" required></label>
+          </div>
+          <label class="co-lab" id="prov-wrap" hidden>Province<select id="ct-province"></select></label>
         </div>
       </div>
 
-      <h3>Billing details</h3>
-      <label class="co-lab">Name on card<input id="ct-name" autocomplete="cc-name" required></label>
-      <label class="co-lab">Country<select id="ct-country" autocomplete="country">
-        <option value="NL">Netherlands</option><option value="BE">Belgium</option>
-        <option value="DE">Germany</option><option value="FR">France</option>
-        <option value="LU">Luxembourg</option><option value="AT">Austria</option>
-        <option value="IE">Ireland</option><option value="ES">Spain</option>
-        <option value="IT">Italy</option><option value="GB">United Kingdom</option>
-        <option value="US">United States</option>
-      </select></label>
-      <label class="co-lab">Address<input id="ct-line1" autocomplete="address-line1" required></label>
-      <div class="co-2">
-        <label class="co-lab">City<input id="ct-city" autocomplete="address-level2" required></label>
-        <label class="co-lab">Postal code<input id="ct-zip" autocomplete="postal-code" required></label>
-      </div>
-      <label class="co-lab">Phone <span class="co-opt">optional</span><input id="ct-phone" type="tel" autocomplete="tel"></label>
+      <label class="co-lab">Phone <span class="co-opt">Optional</span><input id="ct-phone" type="tel" autocomplete="tel"></label>
 
-      <button class="co-pay" id="ct-submit" type="submit">Start free trial</button>
+      <button class="co-pay" id="ct-submit" type="submit">Start trial</button>
       <p class="co-legal">Card required — you won't be charged for 30 days, and you can cancel before the trial ends.</p>
       <p class="co-err" id="ct-err"></p>
     </form>

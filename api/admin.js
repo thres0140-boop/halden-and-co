@@ -11,6 +11,10 @@ module.exports = async function handler(req, res) {
     res.end(type ? body : JSON.stringify(body));
   };
   if (!isAdmin(req)) return send(401, { error: 'unauthorised' });
+  if (req.method === 'DELETE') {
+    const { rowCount } = await pool.query('DELETE FROM trials WHERE id = $1', [q.id]);
+    return send(200, { deleted: rowCount });
+  }
   if (req.method !== 'GET') return send(405, { error: 'Method not allowed' });
 
   const q = req.query || {};
