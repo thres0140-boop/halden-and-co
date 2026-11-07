@@ -1,0 +1,11 @@
+{
+  "name": "halden-and-co",
+  "private": true,
+  "scripts": {
+    "dev": "node --env-file=.env server.js",
+    "stripe:setup": "node --env-file=.env scripts/stripe-setup.js"
+  },
+  "dependencies": {
+    "stripe": "^23.1.0"
+  }
+}
