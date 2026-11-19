@@ -7,3 +7,6 @@ node_modules
 .DS_Store
 api/_supplier.json
 .env*
+
+halden-and-co.zip
+/halden-and-co/

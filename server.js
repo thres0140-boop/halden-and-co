@@ -6,20 +6,13 @@ try { process.loadEnvFile(path.join(__dirname, '.env')); } catch {}
 
 const routes = {
   '/api/checkout': () => require('./api/checkout.js'),
-  '/api/subscribe': () => require('./api/subscribe.js'),
-  '/api/club-trial': () => require('./api/club-trial.js'),
-  '/api/collect': () => require('./api/collect.js'),
-  '/api/admin': () => require('./api/admin.js'),
-  '/api/admin-login': () => require('./api/admin-login.js'),
-  '/api/stripe-webhook': () => require('./api/stripe-webhook.js'),
 };
-const RAW = new Set(['/api/stripe-webhook']);
+const RAW = new Set([]);
 
 const PORT = process.env.PORT || 4321;
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.txt': 'text/plain' };
-const PUBLIC = ['index.html', 'styles.css', 'app.js', 'products.js', 'images.js', 'images',
-  'trial.html', 'trial.js', 'trial.css', 'admin.html', 'admin.js', 'admin.css', 'robots.txt'];
-const ALIAS = { '/trial': 'trial.html', '/admin': 'admin.html' };
+const PUBLIC = ['index.html', 'styles.css', 'app.js', 'products.js', 'robots.txt'];
+const ALIAS = {};
 
 http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://x');
@@ -37,4 +30,4 @@ http.createServer(async (req, res) => {
     res.setHeader('Content-Type', TYPES[path.extname(rel)] || 'application/octet-stream');
     res.end(data);
   });
-}).listen(PORT, () => console.log(`Halden & Co. on http://localhost:${PORT}  (Stripe ${process.env.STRIPE_SECRET_KEY ? (process.env.STRIPE_SECRET_KEY.includes('_live_') ? 'LIVE' : 'test') + ' mode' : 'NOT configured'})`));
+}).listen(PORT, () => console.log(`Halden on http://localhost:${PORT}  (Stripe ${process.env.STRIPE_SECRET_KEY ? (process.env.STRIPE_SECRET_KEY.includes('_live_') ? 'LIVE' : 'test') + ' mode' : 'NOT configured'})`));
