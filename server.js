@@ -11,7 +11,7 @@ const RAW = new Set([]);
 
 const PORT = process.env.PORT || 4321;
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.txt': 'text/plain' };
-const PUBLIC = ['index.html', 'styles.css', 'app.js', 'products.js', 'robots.txt'];
+const PUBLIC = ['index.html', 'styles.css', 'app.js', 'products.js', 'robots.txt', 'media'];
 const ALIAS = {};
 
 http.createServer(async (req, res) => {

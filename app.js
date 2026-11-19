@@ -10,13 +10,20 @@ const BUNDLE_ID = { 1: 'halden-1', 2: 'halden-2', 3: 'halden-3' };
 const COLORS = ['black', 'ivory', 'smoke'];
 const SWATCH = { black: '#1c1c1c', ivory: '#e7e0d2', smoke: '#9a9a9a' };
 const CONTACT = 'soporte@halden.example';
+const AVAIL = ['black']; // colours in stock; others stay in COLORS, hidden until available
+const MEDIA = {
+  heroVideo: 'media/video/hero.mp4', heroPoster: 'media/video/hero-poster.jpg',
+  gallery: ['01', '02', '03', '04', '05', '06', '07'], // media/gallery/NN.webp + .jpg
+  swatch: { black: 'media/gallery/02' },
+};
 /* ================================================================== */
+const pic = (base, alt, cls = '') => `<picture><source srcset="${base}.webp" type="image/webp"><img class="${cls}" src="${base}.jpg" alt="${alt}" loading="lazy"></picture>`;
 
 const $ = (s, el = document) => el.querySelector(s);
 const app = $('#app');
 let LANG = (localStorage.getItem('halden-lang') || 'es');
 if (!['es', 'nl', 'de'].includes(LANG)) LANG = 'es';
-const state = { units: 2, pick: ['black', 'black', 'black'], tab: 'inc' };
+const state = { units: 2, pick: ['black', 'black', 'black'], tab: 'inc', g: 0 };
 
 /* ---------- money + dates ---------- */
 const LOC = { es: 'es-ES', nl: 'nl-NL', de: 'de-DE' };
@@ -36,7 +43,7 @@ const I = {
     heroTitle: 'El paraguas que te mantiene seco de la cabeza a los pies',
     heroSub: 'Una cortina transparente cae desde la cúpula hasta el suelo. Caminas seco, veas donde pises.',
     benefits: ['Seco de la cabeza a los pies', 'Transparente en todo el contorno', 'Se pliega en su propia funda', 'Envío gratis'],
-    color: 'Color', colorNames: { black: 'Negro', ivory: 'Marfil', smoke: 'Humo' },
+    from: 'desde', color: 'Color', colorNames: { black: 'Negro', ivory: 'Marfil', smoke: 'Humo' },
     bundleEyebrow: 'Pack y ahorro', bundleHead: 'Compra más, ahorra más',
     unitsName: u => `${u} ${u === 1 ? 'paraguas' : 'paraguas'}`,
     perUnitLbl: p => `${p} / unidad`, saveLbl: a => `Ahorras ${a}`,
@@ -79,7 +86,7 @@ const I = {
     heroTitle: 'De paraplu die je van top tot teen droog houdt',
     heroSub: 'Een transparant gordijn valt van het scherm tot aan de grond. Je loopt droog en ziet precies waar je gaat.',
     benefits: ['Droog van top tot teen', 'Rondom transparant', 'Vouwt op in zijn eigen hoes', 'Gratis verzending'],
-    color: 'Kleur', colorNames: { black: 'Zwart', ivory: 'Ivoor', smoke: 'Rook' },
+    from: 'vanaf', color: 'Kleur', colorNames: { black: 'Zwart', ivory: 'Ivoor', smoke: 'Rook' },
     bundleEyebrow: 'Pakket & korting', bundleHead: 'Meer kopen, meer besparen',
     unitsName: u => `${u} ${u === 1 ? 'paraplu' : "paraplu's"}`,
     perUnitLbl: p => `${p} / stuk`, saveLbl: a => `Bespaar ${a}`,
@@ -122,7 +129,7 @@ const I = {
     heroTitle: 'Der Schirm, der dich von Kopf bis Fuß trocken hält',
     heroSub: 'Ein transparenter Vorhang fällt vom Dach bis zum Boden. Du gehst trocken und siehst genau, wohin du trittst.',
     benefits: ['Trocken von Kopf bis Fuß', 'Rundum durchsichtig', 'Faltet sich in die eigene Hülle', 'Kostenloser Versand'],
-    color: 'Farbe', colorNames: { black: 'Schwarz', ivory: 'Elfenbein', smoke: 'Rauch' },
+    from: 'ab', color: 'Farbe', colorNames: { black: 'Schwarz', ivory: 'Elfenbein', smoke: 'Rauch' },
     bundleEyebrow: 'Set & Ersparnis', bundleHead: 'Mehr kaufen, mehr sparen',
     unitsName: u => `${u} ${u === 1 ? 'Schirm' : 'Schirme'}`,
     perUnitLbl: p => `${p} / Stück`, saveLbl: a => `Spare ${a}`,
@@ -230,13 +237,13 @@ function home() {
     <div class="buybox">
       <h1 class="p-title">${t('heroTitle')}</h1>
       <p style="color:var(--muted);margin-bottom:14px">${t('heroSub')}</p>
-      <div class="p-price"><span class="now" id="price">${eur(PRICES[state.units])}</span></div>
+      <div class="p-price"><span class="now" id="price">${t('from')} ${eur(49)}</span></div>
       <ul class="benefits">${b.map((x, i) => `<li>${svg(benefitIcons[i])}<span>${x}</span></li>`).join('')}</ul>
 
       <div class="block"><div class="opt-label">${t('color')} <b id="colorName">${t('colorNames')[state.pick[0]]}</b></div>
-        <div class="swatches" id="swatches">${COLORS.map(c => `
+        <div class="swatches" id="swatches">${AVAIL.map(c => `
           <button class="swatch ${c === state.pick[0] ? 'on' : ''}" data-c="${c}">
-            <div class="sw-img" style="background:${SWATCH[c] === '#1c1c1c' ? '#f1ecE3' : '#fbf9f5'}">${umbrella(SWATCH[c])}</div>
+            <div class="sw-img">${MEDIA.swatch[c] ? pic(MEDIA.swatch[c], t('colorNames')[c]) : umbrella(SWATCH[c])}</div>
             <div class="sw-name">${t('colorNames')[c]}</div></button>`).join('')}</div>
       </div>
 
@@ -268,7 +275,7 @@ function home() {
   </div></section>
 
   <section class="section"><div class="wrap"><div class="section-h"><h2>${t('reelsHead')}</h2></div>
-    <div class="reels">${[1, 2, 3, 4].map(() => `<div class="reel">${frame('', 'Reel')}</div>`).join('')}</div>
+    <div class="reels">${[1, 2, 3, 4].map(n => `<div class="reel"><video class="reel-v" muted loop playsinline preload="none" poster="media/video/reel-${n}-poster.jpg" data-src="media/video/reel-${n}.mp4"></video></div>`).join('')}</div>
   </div></section>
 
   <section class="finalcta"><div class="eyebrow" style="color:var(--accent)">${t('endsIn')}</div>
@@ -282,13 +289,37 @@ function home() {
   </div></section>`;
 
   // gallery
-  $('#gallery').innerHTML = frame('hero-main', `▸ ${t('placeholder')}`).replace('<div class="ph-label">', '<div class="play">' + svg(ico.play).replace('icn', 'icn') + '</div><div class="ph-label">')
-    + `<div class="thumbs">${[1, 2, 3].map(() => frame('', '')).join('')}</div>`;
+  $('#gallery').innerHTML = `<div class="g-main" id="gMain"></div><div class="g-thumbs" id="gThumbs"></div>`;
+  renderGallery();
 
   bindHome();
   startCountdown();
+  setupReels();
   syncSticky(true);
   observeSticky();
+}
+
+function renderGallery() {
+  const items = [{ type: 'video' }, ...MEDIA.gallery.map(n => ({ type: 'img', n }))];
+  const it = items[state.g] || items[0];
+  $('#gMain').innerHTML = it.type === 'video'
+    ? `<video class="g-media" src="${MEDIA.heroVideo}" poster="${MEDIA.heroPoster}" autoplay muted loop playsinline></video>`
+    : `<div class="g-media">${pic('media/gallery/' + it.n, 'Halden')}</div>`;
+  $('#gThumbs').innerHTML = items.map((x, i) => `<button class="g-thumb ${i === state.g ? 'on' : ''}" data-gi="${i}" aria-label="${i + 1}">${x.type === 'video'
+    ? `<img src="${MEDIA.heroPoster}" alt=""><span class="g-play">${svg(ico.play)}</span>`
+    : pic('media/gallery/' + x.n, '')}</button>`).join('');
+  $('#gThumbs').querySelectorAll('[data-gi]').forEach(b => b.onclick = () => { state.g = +b.dataset.gi; renderGallery(); });
+}
+
+function setupReels() {
+  const vids = document.querySelectorAll('.reel-v'); if (!vids.length) return;
+  if (!('IntersectionObserver' in window)) { vids.forEach(v => { v.src = v.dataset.src; v.play?.().catch(() => {}); }); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) { if (!v.src) v.src = v.dataset.src; v.play?.().catch(() => {}); }
+    else v.pause?.();
+  }), { threshold: 0.35 });
+  vids.forEach(v => io.observe(v));
 }
 
 function tierHTML(u) {
@@ -298,10 +329,10 @@ function tierHTML(u) {
     ${flag}<span class="radio"></span>
     <div class="tier-top"><span class="tier-name">${t('unitsName')(u)}</span><span class="tier-price">${eur(PRICES[u])}</span></div>
     <div class="tier-sub"><span>${t('perUnitLbl')(eur(perUnit(u)))}</span>${sv > 0 ? `<span class="save">${t('saveLbl')(eur(sv))}</span>` : `<span>${t('freeShip')}</span>`}</div>
-    <div class="unit-pickers ${u === state.units && u > 1 ? '' : 'hide'}" data-pickers="${u}">
+    <div class="unit-pickers ${u === state.units && u > 1 && AVAIL.length > 1 ? '' : 'hide'}" data-pickers="${u}">
       <div class="opt-label" style="margin:0">${t('chooseEach')}</div>
       ${Array.from({ length: u }, (_, n) => `<div class="unit-row"><div class="u-label">${t('unitLbl')(n + 1)}</div>
-        <div class="u-dots">${COLORS.map(c => `<button data-unit="${n}" data-color="${c}" class="${state.pick[n] === c ? 'on' : ''}"><span class="dot" style="background:${SWATCH[c]}"></span></button>`).join('')}</div></div>`).join('')}
+        <div class="u-dots">${AVAIL.map(c => `<button data-unit="${n}" data-color="${c}" class="${state.pick[n] === c ? 'on' : ''}"><span class="dot" style="background:${SWATCH[c]}"></span></button>`).join('')}</div></div>`).join('')}
     </div></div>`;
 }
 
@@ -331,7 +362,6 @@ function rerenderBuy() {
   $('#colorName').textContent = t('colorNames')[state.pick[0]];
   document.querySelectorAll('[data-c]').forEach(b => b.classList.toggle('on', b.dataset.c === state.pick[0]));
   $('#tiers').innerHTML = [1, 2, 3].map(u => tierHTML(u)).join('');
-  $('#price').textContent = eur(PRICES[state.units]);
   $('#addPrice').textContent = eur(PRICES[state.units]);
   // rebind tier + unit handlers
   document.querySelectorAll('[data-u]').forEach(el => el.onclick = e => { if (e.target.closest('[data-unit]')) return; state.units = +el.dataset.u; rerenderBuy(); });
