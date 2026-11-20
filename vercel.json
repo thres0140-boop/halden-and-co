@@ -1,1 +1,8 @@
-{ "cleanUrls": true }
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.wearrainveil.com" }], "destination": "https://wearrainveil.com/$1", "statusCode": 301 },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "haldenfurniture.com" }], "destination": "https://wearrainveil.com/$1", "statusCode": 301 },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.haldenfurniture.com" }], "destination": "https://wearrainveil.com/$1", "statusCode": 301 }
+  ]
+}

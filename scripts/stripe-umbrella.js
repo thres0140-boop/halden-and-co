@@ -15,7 +15,7 @@ const ids = JSON.parse(fs.readFileSync(file, 'utf8'));
     if (ids[b.id]) { console.log(`skip  ${b.name} (${ids[b.id]})`); continue; }
     const p = await stripe.products.create({
       name: b.name,
-      description: `${b.units} Halden full-body rain umbrella${b.units > 1 ? 's' : ''}. Free shipping.`,
+      description: `${b.units} Rainveil full-body rain umbrella${b.units > 1 ? 's' : ''}. Free shipping.`,
       metadata: { shop_id: b.id, units: String(b.units) },
       default_price_data: { currency: 'eur', unit_amount: Math.round(b.price * 100) },
     });
