@@ -251,6 +251,8 @@ function syncSticky(show) {
 /* ---------- home ---------- */
 function home() {
   const b = t('benefits'); const benefitIcons = [ico.drop, ico.eye, ico.sleeve, ico.truck];
+  const colorBlock = AVAIL.length > 1 ? `<div class="block"><div class="opt-label">${t('color')} <b id="colorName">${t('colorNames')[state.pick[0]]}</b></div>
+        <div class="swatches" id="swatches">${AVAIL.map(c => `<button class="swatch ${c === state.pick[0] ? 'on' : ''}" data-c="${c}"><div class="sw-img">${MEDIA.swatch[c] ? pic(MEDIA.swatch[c], t('colorNames')[c]) : umbrella(SWATCH[c])}</div><div class="sw-name">${t('colorNames')[c]}</div></button>`).join('')}</div></div>` : '';
   app.innerHTML = `
   <section class="hero"><div class="wrap hero-grid">
     <div class="gallery" id="gallery"></div>
@@ -260,12 +262,7 @@ function home() {
       <div class="p-price"><span class="now" id="price">${t('from')} ${eur(49)}</span></div>
       <ul class="benefits">${b.map((x, i) => `<li>${svg(benefitIcons[i])}<span>${x}</span></li>`).join('')}</ul>
 
-      <div class="block"><div class="opt-label">${t('color')} <b id="colorName">${t('colorNames')[state.pick[0]]}</b></div>
-        <div class="swatches" id="swatches">${AVAIL.map(c => `
-          <button class="swatch ${c === state.pick[0] ? 'on' : ''}" data-c="${c}">
-            <div class="sw-img">${MEDIA.swatch[c] ? pic(MEDIA.swatch[c], t('colorNames')[c]) : umbrella(SWATCH[c])}</div>
-            <div class="sw-name">${t('colorNames')[c]}</div></button>`).join('')}</div>
-      </div>
+      ${colorBlock}
 
       <div class="block"><div class="opt-label" style="margin-bottom:4px">${t('bundleEyebrow')}</div>
         <div class="tiers" id="tiers">${[1, 2, 3].map(u => tierHTML(u)).join('')}</div></div>
@@ -379,7 +376,7 @@ function bindHome() {
 }
 
 function rerenderBuy() {
-  $('#colorName').textContent = t('colorNames')[state.pick[0]];
+  const _cn = $('#colorName'); if (_cn) _cn.textContent = t('colorNames')[state.pick[0]];
   document.querySelectorAll('[data-c]').forEach(b => b.classList.toggle('on', b.dataset.c === state.pick[0]));
   $('#tiers').innerHTML = [1, 2, 3].map(u => tierHTML(u)).join('');
   $('#addPrice').textContent = eur(PRICES[state.units]);
